@@ -1,7 +1,9 @@
 package guru.springframework.sdjpa.wp.domain;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import org.hibernate.validator.constraints.URL;
 
 import java.sql.Timestamp;
@@ -67,6 +69,17 @@ public class User {
     @OneToMany
     @JoinColumn(name = "user_id")
     private Set<UserMeta> userMetaSet;
+
+    @OneToMany(mappedBy = "user")
+    private Set<Comment> comments;
+
+    public Set<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(Set<Comment> comments) {
+        this.comments = comments;
+    }
 
     public Set<UserMeta> getUserMetaSet() {
         return userMetaSet;
